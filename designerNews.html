@@ -19,7 +19,9 @@ body {
 
 #viz {
   margin: 50px 0 0 0;
+  cursor: pointer;
 }
+
 
 </style>
 
@@ -71,7 +73,16 @@ d3.json("https://news.layervault.com/u/tree.json", function(error, root) {
       .style("fill-rule", "evenodd")
       .on("mouseover", function(d){
         var name = d.display_name;
-        $("#title").text(name);
+        
+        var number
+        if (!d.children){
+          number = 0;
+        }
+        else number = d.children.length;
+
+
+        $("#title").text(name + " invited " + number + " other users.");
+
       })
       .on("click", function(d){
         window.open("https://news.layervault.com/u/"+d.id);
