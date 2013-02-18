@@ -72,7 +72,12 @@ d3.json("https://news.layervault.com/u/tree.json", function(error, root) {
       .on("mouseover", function(d){
         var name = d.display_name;
         $("#title").text(name);
-      });
+      })
+      .on("click", function(d){
+        window.open("https://news.layervault.com/u/"+d.id);
+      })
+
+      ;
 
 });
   
