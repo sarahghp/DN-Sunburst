@@ -25,7 +25,7 @@ body {
 
 </style>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/d3.v3.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </head>
@@ -46,14 +46,26 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("id", "viz")
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + width / 2 + "," + height * .42 + ")");
+
+function cleanChildren(children) {
+  var cleaned = new Array();
+  for(var i = 0; i<children.length; i++){
+    if (children[i]){
+          cleaned.push(children[i]);
+    }
+  }
+  return cleaned;
+}
 
 var partition = d3.layout.partition()
     .sort(null)
     .size([2 * Math.PI, 1.8 * radius * radius])
     .value(function(d) { return 1; })
-    .children(function(d) {return d.invited; }  );
+    .children(function(d) {
+      return cleanChildren(d.invited);
+    }  );
 
 var arc = d3.svg.arc()
     .startAngle(function(d) { return d.x; })
@@ -62,10 +74,9 @@ var arc = d3.svg.arc()
     .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
 
 d3.json("https://news.layervault.com/u/tree.json", function(error, root) {
-
   var path = svg.datum(root).selectAll("path")
       .data(partition.nodes)
-    .enter().append("path")
+      .enter().append("path")
       .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
       .attr("d", arc)
       .style("stroke", "#2d72d9")
@@ -73,10 +84,10 @@ d3.json("https://news.layervault.com/u/tree.json", function(error, root) {
       .style("fill-rule", "evenodd")
       .on("mouseover", function(d){
         var name = d.display_name;
-        
+  
         var number
         if (!d.children){
-          number = 0;
+          number = 1;
         }
         else number = d.children.length;
 
