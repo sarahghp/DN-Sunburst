@@ -25,7 +25,7 @@ body {
 
 </style>
 
-<script src="http://d3js.org/d3.v3.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </head>
@@ -87,7 +87,7 @@ d3.json("https://news.layervault.com/u/tree.json", function(error, root) {
   
         var number
         if (!d.children){
-          number = 1;
+          number = 0;
         }
         else number = d.children.length;
 
