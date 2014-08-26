@@ -25,8 +25,8 @@ body {
 
 </style>
 
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
 </head>
 <body>
@@ -73,7 +73,7 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return Math.sqrt(d.y); })
     .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
 
-d3.json("https://news.layervault.com/u/tree.json", function(error, root) {
+d3.json("/tree.json", function(error, root) {
   var path = svg.datum(root).selectAll("path")
       .data(partition.nodes)
       .enter().append("path")
@@ -97,9 +97,7 @@ d3.json("https://news.layervault.com/u/tree.json", function(error, root) {
       })
       .on("click", function(d){
         window.open("https://news.layervault.com/u/"+d.id);
-      })
-
-      ;
+      });
 
 });
   
