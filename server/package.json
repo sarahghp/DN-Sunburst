@@ -1,0 +1,7 @@
+{
+  "name": "Tree Scraper",
+  "version": "1",
+  "dependencies": {
+    "request": "2.40.0"
+  }
+}
