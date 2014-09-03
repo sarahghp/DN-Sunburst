@@ -12,6 +12,7 @@ function getTree () {
 						}
 					});
 				}));
+	console.log('Updated' + new Date());
 }
 
 getTree();
