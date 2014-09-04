@@ -12,7 +12,7 @@ function getTree () {
 						}
 					});
 				}));
-	console.log('Updated' + new Date());
+	console.log('Updated ' + new Date());
 }
 
 getTree();
